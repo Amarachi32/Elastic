@@ -35,7 +35,7 @@ namespace Elastic
             products.Add(item1);
             products.Add(item2);
             products.Add(item3);
-
+        Start:
             Console.WriteLine("enter any of these property to view their values [Id, Name, Quantity, Price, Category]");
             string name = Console.ReadLine();
             Console.Write($" Content: {item1.GetPropVale(name)}\t");
@@ -43,11 +43,16 @@ namespace Elastic
             Console.Write($" {item3.GetPropVale(name)}\n\n");
 
 
-
-
-
-            Console.WriteLine("press enter to view all");
-            Console.Read();
+            Console.WriteLine("press y to view another property, press n to exit or press enter to view all the properties");
+            string input = Console.ReadLine().ToLower();
+            if (input == "y")
+            {
+                goto Start;
+            }
+            else if (input == "n")
+            {
+                Environment.Exit(0);
+            }
 
             foreach (var it in products)
             {
