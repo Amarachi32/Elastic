@@ -6,7 +6,7 @@ namespace Elastic
     {
         static void Main(string[] args)
         {
-            List<Product> products = new List<Product>();
+           List<Product> products = new List<Product>();
 
             var item1 = new Product
             {
@@ -36,26 +36,27 @@ namespace Elastic
             products.Add(item2);
             products.Add(item3);
 
-
             Console.WriteLine("enter any of these property to view their values [Id, Name, Quantity, Price, Category]");
             string name = Console.ReadLine();
-            Console.Write($" property: {item1.GetPropVale(name)}\t");
+            Console.Write($" Content: {item1.GetPropVale(name)}\t");
             Console.Write($" {item2.GetPropVale(name)}\t");
             Console.Write($" {item3.GetPropVale(name)}\n\n");
 
 
 
+
+
             Console.WriteLine("press enter to view all");
             Console.Read();
-            foreach (var prop in item1.GetType().GetProperties())
+
+            foreach (var it in products)
             {
-                //Console.WriteLine(prop.GetValue(item1));
                 dynamic expando;
                 expando = new ExpandoObject();
-                //expando.getAll = $"{prop.Id},{it.Name}, {it.Price.ToString()}, {it.Category}";
-                expando.getAll = $"{prop.Name}: {prop.GetValue(item1).ToString()}";
+                expando.getAll = $"{it.Id},{it.Name}, {it.Price.ToString()}, {it.Category}";
                 Console.WriteLine(expando.getAll);
             }
+            Console.ReadKey();
         }
     }
 }
