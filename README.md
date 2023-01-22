@@ -33,7 +33,7 @@ Code Sample for Dynamic collection
 * **Data**:Elastic Collection
 
 
-**NOTE**:We have used the power of **expando Object  and dynamic keyword** in C# to make our code more flexible and easier to read than using reflection.
+**NOTE**:We have used the power of **expando Object  and dynamic keyword** in C# to make our code more flexible and easier to retrieve values dynamically than using reflection.
 
 
 
