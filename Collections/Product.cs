@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Elastic
+﻿namespace CollectionModels
 {
     public class Product
     {
@@ -15,6 +9,6 @@ namespace Elastic
         public int Quantity { get; set; }
         public int Price { get; set; }
         public string Category { get; set; }
-        public string OrderCount { get; set; }
+        public int OrderCount { get; set; }
     }
 }
