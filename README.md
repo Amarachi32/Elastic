@@ -9,22 +9,19 @@ enables getting, setting, and invoking members.
 and also to set and get values of these members.
 which enables you to use standard syntax like sampleObject.sampleMember instead of more 
 complex syntax like sampleObject.GetAttribute("sampleMember").
+
+Code Sample for Dynamic collection
 ***
-	        public DocumentAttribute(string description)
-        {
-            Description = description;
-        }
+	      List<ExpandoObject> list = new List<ExpandoObject>();
 
-        public DocumentAttribute(string description, string input = "", string output = "")
-        {
-            Description = description;
-            Input = input;
-            Output = output;
-        }
+            dynamic obj1 = new ExpandoObject();
+            obj1.Id = 30;
+            obj1.Name = "John Doe";
+           
 
-        public string Description { get; set; }
-        public string Input { get; set; }
-        public string Output { get; set; }
+            dynamic obj2 = new ExpandoObject();
+            obj2.Id = 25;
+            obj2.Name = "Samsung";
 ***
 
 ## Software Development Summary😃👓👓
