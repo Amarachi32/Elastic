@@ -5,89 +5,78 @@ namespace Elastic
     public class ProductItem
     {
 
-        public static void run()
+        private static List<Product> products = new List<Product>()
         {
-            List<ExpandoObject> list = new List<ExpandoObject>();
+            new Product { Id = 1, Name = "Hp", Quantity = 30, Price = 2300.5, Category = "Laptops", OrderCount = 100 },
+            new Product { Id = 2, Name = "Samsung", Quantity = 40, Price = 840, Category = "Phones", OrderCount = 400 },
+            new Product { Id = 3, Name = "Konica", Quantity = 10, Price = 290.65, Category = "Printers", OrderCount = 300 }
 
-            dynamic obj1 = new ExpandoObject();
-            obj1.Id = 30;
-            obj1.Name = "John Doe";
-            obj1.Quantity = 30;
-            obj1.Price = 1500;
-            obj1.Category = "Laptops";
-            obj1.OrderCount = 1000;
-
-            dynamic obj2 = new ExpandoObject();
-            obj2.Id = 25;
-            obj2.Name = "Samsung";
-            obj2.Quantity = 400;
-            obj2.Price = 200;
-            obj2.Category = "Phones";
-            obj2.OrderCount = 4000;
-
-            dynamic obj3 = new ExpandoObject();
-            obj3.Id = 3;
-            obj3.Name = "Konica";
-            obj3.Quantity = 500;
-            obj3.Price = 250;
-            obj3.Category = "Printers";
-            obj3.OrderCount = 3000;
-
-            list.Add(obj1);
-            list.Add(obj2);
-            list.Add(obj3);
-
-
-            dynamic enumerator = list.GetEnumerator();
-
-            try
+        };
+       public static void ListAll(List<Product> products)
+        {
+            foreach (var product in products)
             {
-                Console.WriteLine("List of all Properties in the Product");
-                while (enumerator.MoveNext())
+                Console.WriteLine($"{product.Id} {product.Name} {product.Quantity} {product.Price} {product.Category} {product.OrderCount}");
+            }
+        }          
+
+    public static void ListProducts(string[] propertyNames)
+        {
+            Console.WriteLine("\n  List of Products based on propertyNames entered\n  ============================================\n");
+
+            foreach (Product product in products)
+            {
+                dynamic productProperty = new ExpandoObject();
+
+                productProperty.Id = product.Id;
+                productProperty.Name = product.Name;
+
+                productProperty.Quantity = product.Quantity;
+                productProperty.Price = product.Price;
+
+                productProperty.Category = product.Category;
+                productProperty.OrderCount = product.OrderCount;
+
+
+                foreach (string property in propertyNames)
                 {
-                    dynamic item = (ExpandoObject)enumerator.Current;
-
-                    Console.WriteLine($"\n{item.Id}, {item.Name}, {item.Quantity}, {item.Price}, {item.Category}, {item.OrderCount}");
-
-                }
-            }
-            finally
-            {
-                enumerator.Dispose();
-            }
-
-        Start:
-            Console.WriteLine("\n\nEnter any of these properties to view <Name, Id, Quantity, Category, Price,OrderCount>:\n");
-            string propertyName = Console.ReadLine();
-
-
-            foreach (var obj in list)
-            {
-                if (obj is IDictionary<string, object> dictionary)
-                {
-                    if (dictionary.ContainsKey(propertyName))
+                    switch (property)
                     {
-                        Console.WriteLine(dictionary[propertyName]);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Property '{propertyName}' does not exist.");
+                        case "" and "" and "" and "" and "" and "":
+                            Console.Write($"  {productProperty.Id}, {productProperty.Name}, {productProperty.Quantity}, ${productProperty.Price}, {productProperty.Category}, {productProperty.OrderCount}");
+                            break;
+
+                        case "id":
+                            Console.Write($"  {productProperty.Id},");
+                            break;
+
+                        case "name":
+                            Console.Write($"  {productProperty.Name},");
+                            break;
+
+                        case "quantity":
+                            Console.Write($"  {productProperty.Quantity},");
+                            break;
+
+                        case "price":
+                            Console.Write($"  ${productProperty.Price},");
+                            break;
+
+                        case "category":
+                            Console.Write($"  {productProperty.Category},");
+                            break;
+
+                        case "ordercount":
+                            Console.Write($"  {productProperty.OrderCount},");
+                            break;
+
+                        default:
+                            throw new InvalidOperationException();
                     }
                 }
-            }
-            Console.WriteLine("\npress enter to view more properties or 'q' to quit");
 
-            string input = Console.ReadLine().ToLower();
-            if (input == "q")
-            {
-                Environment.Exit(0);
+                Console.WriteLine("\n");
             }
-            else
-            {
-                goto Start;
-            }
-
-
         }
     }
 

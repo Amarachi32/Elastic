@@ -7,7 +7,7 @@ namespace Elastic
         {
             Console.WriteLine("***************Elastic Collection using Expando Object****************\n\n");
 
-            ProductItem.run();
+            UserInput.EnterProperty();
             Console.ReadKey();
         }
     }
